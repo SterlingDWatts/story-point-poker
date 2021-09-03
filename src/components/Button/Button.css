@@ -44,52 +44,28 @@
   color: black;
 }
 
-.Button.type-contained.color-blue {
+.Button.color-blue {
   background-color: #0047cb;
 }
 
-.Button.type-contained.color-blue:hover {
-  background-color: #003cbd;
-}
-
-.Button.type-contained.color-blue:focus {
-  background-color: #0031af;
-}
-
-.Button.type-contained.color-blue:focus {
-  background-color: #0026a1;
-}
-
-.Button.type-contained.color-yellow {
+.Button.color-yellow {
   background-color: #ffd100;
 }
 
-.Button.type-contained.color-yellow:hover {
-  background-color: #e7cc00;
-}
-
-.Button.type-contained.color-yellow:focus {
-  background-color: #d5be00;
-}
-
-.Button.type-contained.color-yellow:focus {
-  background-color: #c3b000;
-}
-
-.Button.type-contained.color-pink {
+.Button.color-pink {
   background-color: #ff0266;
 }
 
-.Button.type-contained.color-pink:hover {
-  background-color: #f0005d;
+.Button.type-contained:hover {
+  filter: brightness(90%);
 }
 
-.Button.type-contained.color-pink:focus {
-  background-color: #e30054;
+.Button.type-contained:focus {
+  filter: brightness(80%);
 }
 
-.Button.type-contained.color-pink:focus {
-  background-color: #d6004b;
+.Button.type-contained:focus {
+  filter: brightness(70%);
 }
 .Button.type-outlined,
 .Button.type-text {
