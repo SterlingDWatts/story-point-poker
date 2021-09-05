@@ -19,6 +19,12 @@ const JoinForm: React.FC = () => {
     setOptions({ ...options, selectedValue: value, touched: true });
   };
 
+  const twoHoursFromNow = () => {
+    const dt = new Date();
+    dt.setHours(dt.getHours() + 2);
+    return dt;
+  };
+
   const history = useHistory();
   const { setToken } = useContext(LoginContext) as LoginValue;
   const handleSubmit = async (event: React.FormEvent) => {
@@ -29,10 +35,10 @@ const JoinForm: React.FC = () => {
       data: {
         name: name.value,
         role: options.selectedValue,
-        expDate: new Date(Math.floor(Date.now() / 1000) + 60 * 60 * 2),
+        expDate: twoHoursFromNow(),
       },
     });
-    console.log(response);
+
     if (response && response.data && response.data.user && response.data.token) {
       setToken(response.data.token);
       setName({ value: "", touched: false });
