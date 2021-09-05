@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
+import Chip from "../../components/Chip/Chip";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import UserContext, { UserValue } from "../../contexts/UserContext";
 import { instance } from "../../services/apiService";
@@ -26,51 +27,14 @@ const HomePage: React.FC = () => {
     window.scrollTo({ behavior: "smooth", left: 0, top: 0 });
   };
 
-  const users = userState.map((user, idx) => (
-    <div
-      key={idx}
-      style={{
-        display: "flex",
-        backgroundColor: "white",
-        color: "black",
-        marginBottom: "16px",
-        borderRadius: "4px",
-        overflow: "hidden",
-      }}
-    >
-      <img
-        src={`https://picsum.photos/id/${Math.floor(Math.random() * 50)}/60`}
-        alt="random"
-        height="60px"
-        width="60px"
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flex: 1,
-          padding: "16px 10px 10px",
-          width: "fit-content",
-        }}
-      >
-        <div className="name" style={{ fontWeight: 600 }}>
-          {user.name}
-        </div>
-        <div className="role" style={{ fontSize: "12px" }}>
-          {user.role}
-        </div>
-      </div>
-    </div>
-  ));
+  const users = userState.map((user) => <Chip user={user} key={user._id} />);
 
   return (
     <Page className="HomePage" color="blue">
       <header>
         <h1>MINDERA POKER</h1>
       </header>
-      <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>{users}</div>
+      <div className="user-chips">{users}</div>
       <div className="buttons">
         {loginState.isLoggedIn ? (
           <Link to="/poker">
