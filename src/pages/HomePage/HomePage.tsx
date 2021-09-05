@@ -31,7 +31,6 @@ const HomePage: React.FC = () => {
       key={idx}
       style={{
         display: "flex",
-        width: "100%",
         backgroundColor: "white",
         color: "black",
         marginBottom: "16px",
@@ -45,7 +44,24 @@ const HomePage: React.FC = () => {
         height="60px"
         width="60px"
       />
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>{user.name}</div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          flex: 1,
+          padding: "16px 10px 10px",
+          width: "fit-content",
+        }}
+      >
+        <div className="name" style={{ fontWeight: 600 }}>
+          {user.name}
+        </div>
+        <div className="role" style={{ fontSize: "12px" }}>
+          {user.role}
+        </div>
+      </div>
     </div>
   ));
 
@@ -54,7 +70,7 @@ const HomePage: React.FC = () => {
       <header>
         <h1>MINDERA POKER</h1>
       </header>
-      <div style={{ width: "100%" }}>{users}</div>
+      <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>{users}</div>
       <div className="buttons">
         {loginState.isLoggedIn ? (
           <Link to="/poker">

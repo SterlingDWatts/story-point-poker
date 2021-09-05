@@ -29,6 +29,7 @@ const JoinForm: React.FC = () => {
       data: {
         name: name.value,
         role: options.selectedValue,
+        expDate: Math.floor(Date.now() / 1000) + 60 * 60 * 2,
       },
     });
     console.log(response);

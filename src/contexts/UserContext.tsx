@@ -4,6 +4,7 @@ export interface User {
   _id: number;
   name: string;
   role: string;
+  expDate: Date;
 }
 
 type UserState = User[];
@@ -48,11 +49,11 @@ export const UserProvider: React.FC<{ children: JSX.Element }> = ({ children }) 
   };
 
   const clearUsers = () => {
-    dispatch({ type: "clear-users", payload: [{ _id: 1, name: "", role: "QAE" }] });
+    dispatch({ type: "clear-users", payload: [{ _id: 1, name: "", role: "QAE", expDate: new Date() }] });
   };
 
   const removeUser = (userId: number) => {
-    dispatch({ type: "remove-user", payload: [{ _id: userId, name: "", role: "QAE" }] });
+    dispatch({ type: "remove-user", payload: [{ _id: userId, name: "", role: "QAE", expDate: new Date() }] });
   };
 
   const editUser = (user: User) => {
