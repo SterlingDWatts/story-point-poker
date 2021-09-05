@@ -19,8 +19,8 @@ const tokenService = {
     return this.parseToken();
   },
 
-  setToken(token: string): void {
-    window.sessionStorage.setItem(config.TOKEN_KEY!, token);
+  setToken(token: jwt.Jwt): void {
+    window.sessionStorage.setItem(config.TOKEN_KEY!, JSON.stringify(token));
   },
 
   removeItem(): void {
