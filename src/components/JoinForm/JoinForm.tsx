@@ -3,9 +3,10 @@ import { useHistory } from "react-router-dom";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import SelectGroup from "../SelectGroup/SelectGroup";
 import Button from "../Button/Button";
-import UserContext, { UserValue } from "../../contexts/UserContext";
+import UserContext, { UserValue, User } from "../../contexts/UserContext";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import { defaultOptions, validateName, validateRole } from "./JoinFormHelper";
+import { instance } from "../../services/apiService";
 import "./JoinForm.css";
 
 const JoinForm: React.FC = () => {
@@ -22,14 +23,24 @@ const JoinForm: React.FC = () => {
   const history = useHistory();
   const { addUser } = useContext(UserContext) as UserValue;
   const { setToken } = useContext(LoginContext) as LoginValue;
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const user = { id: Math.random() * 100, name: name.value, role: options.selectedValue };
-    addUser(user);
-    setToken(user);
-    setName({ value: "", touched: false });
-    setOptions(defaultOptions);
-    history.push("/");
+    const response = await instance({
+      url: "/login",
+      method: "POST",
+      data: {
+        name: name.value,
+        role: options.selectedValue,
+      },
+    });
+    console.log(response);
+    if (response && response.data && response.data.user && response.data.token) {
+      addUser(response.data.user as User);
+      setToken(response.data.token);
+      setName({ value: "", touched: false });
+      setOptions(defaultOptions);
+      history.push("/");
+    }
   };
 
   const nameValidation = validateName(name);

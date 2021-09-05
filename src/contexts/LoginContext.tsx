@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createContext, useReducer } from "react";
-import jwtDecode from "jwt-decode";
 import jwt from "jsonwebtoken";
 import config from "../config";
 import { User } from "./UserContext";
+import tokenService from "../services/tokenService";
 
 interface State {
   isLoggedIn: boolean;
@@ -31,20 +31,19 @@ const LoginStateReducer: LoginReducer = (state, action) => {
   let tokenString: string | null;
   switch (action.type) {
     case "get-token":
-      tokenString = window.localStorage.getItem(config.TOKEN_KEY!);
-      if (tokenString) {
-        token = jwtDecode(tokenString);
-        return token ? { isLoggedIn: true, token } : state;
-      }
-      return state;
+      token = tokenService.getToken();
+      return token ? { isLoggedIn: true, token } : state;
 
     case "set-token":
-      tokenString = jwt.sign(action.payload, config.JWT_PRIVATE_KEY!);
-      window.localStorage.setItem(config.TOKEN_KEY!, tokenString);
+      tokenString = jwt.sign(
+        { ...action.payload, exp: Math.floor(Date.now() / 1000) + 60 * 60 * 2 },
+        config.JWT_PRIVATE_KEY!
+      );
+      tokenService.setToken(tokenString);
       return { isLoggedIn: true, token: tokenString };
 
     case "logout":
-      window.localStorage.removeItem(config.TOKEN_KEY!);
+      tokenService.removeItem();
       return { isLoggedIn: false, token: null };
 
     default:
