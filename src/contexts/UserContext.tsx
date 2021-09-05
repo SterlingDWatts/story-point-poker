@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 
 export interface User {
-  id: number;
+  _id: number;
   name: string;
   role: string;
 }
@@ -17,7 +17,7 @@ export interface UserValue {
   userState: UserState;
   addUser: (user: User) => void;
   clearUsers: () => void;
-  removeUser: (id: number) => void;
+  removeUser: (_id: number) => void;
   editUser: (user: User) => void;
 }
 
@@ -32,9 +32,9 @@ const userStateReducer: UserReducer = (state, action) => {
     case "clear-users":
       return [];
     case "remove-user":
-      return [...state.filter((user) => user.id !== action.payload.id)];
+      return [...state.filter((user) => user._id !== action.payload._id)];
     case "edit-user":
-      return [...state.map((user) => (user.id !== action.payload.id ? user : (action.payload as User)))];
+      return [...state.map((user) => (user._id !== action.payload._id ? user : (action.payload as User)))];
     default:
       return state;
   }
@@ -52,7 +52,7 @@ export const UserProvider: React.FC<{ children: JSX.Element }> = ({ children }) 
   };
 
   const removeUser = (userId: number) => {
-    dispatch({ type: "remove-user", payload: { id: userId } });
+    dispatch({ type: "remove-user", payload: { _id: userId } });
   };
 
   const editUser = (user: User) => {
