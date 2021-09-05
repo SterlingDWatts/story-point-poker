@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import SelectGroup from "../SelectGroup/SelectGroup";
 import Button from "../Button/Button";
-import UserContext, { UserValue, User } from "../../contexts/UserContext";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import { defaultOptions, validateName, validateRole } from "./JoinFormHelper";
 import { instance } from "../../services/apiService";
@@ -21,7 +20,6 @@ const JoinForm: React.FC = () => {
   };
 
   const history = useHistory();
-  const { addUser } = useContext(UserContext) as UserValue;
   const { setToken } = useContext(LoginContext) as LoginValue;
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -35,7 +33,6 @@ const JoinForm: React.FC = () => {
     });
     console.log(response);
     if (response && response.data && response.data.user && response.data.token) {
-      addUser(response.data.user as User);
       setToken(response.data.token);
       setName({ value: "", touched: false });
       setOptions(defaultOptions);

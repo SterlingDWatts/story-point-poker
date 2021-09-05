@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
+import UserContext, { UserValue } from "../../contexts/UserContext";
+import { instance } from "../../services/apiService";
 import "./HomePage.css";
 
 const HomePage: React.FC = () => {
@@ -11,15 +13,48 @@ const HomePage: React.FC = () => {
     getToken();
   }, []);
 
+  const { addUser, userState } = useContext(UserContext) as UserValue;
+  useEffect(() => {
+    instance.get("/users").then((res) => {
+      if (res && res.data && res.data.users) {
+        addUser(res.data.users);
+      }
+    });
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ behavior: "smooth", left: 0, top: 0 });
   };
+
+  const users = userState.map((user, idx) => (
+    <div
+      key={idx}
+      style={{
+        display: "flex",
+        width: "100%",
+        backgroundColor: "white",
+        color: "black",
+        marginBottom: "16px",
+        borderRadius: "4px",
+        overflow: "hidden",
+      }}
+    >
+      <img
+        src={`https://picsum.photos/id/${Math.floor(Math.random() * 50)}/60`}
+        alt="random"
+        height="60px"
+        width="60px"
+      />
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>{user.name}</div>
+    </div>
+  ));
 
   return (
     <Page className="HomePage" color="blue">
       <header>
         <h1>MINDERA POKER</h1>
       </header>
+      <div style={{ width: "100%" }}>{users}</div>
       <div className="buttons">
         {loginState.isLoggedIn ? (
           <Link to="/poker">
