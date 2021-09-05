@@ -1,0 +1,18 @@
+.Option {
+  height: 48px;
+  padding: 0 16px;
+  font-size: 16px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  letter-spacing: 0.08929em;
+}
+
+.Option.selected {
+  filter: brightness(80%);
+}
+
+.Option:hover {
+  filter: brightness(90%);
+}

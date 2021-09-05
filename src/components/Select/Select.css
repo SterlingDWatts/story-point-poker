@@ -1,0 +1,85 @@
+.Select {
+  margin: 16px 0;
+}
+
+.Select .container {
+  position: relative;
+}
+
+.Select .select--selected-text {
+  padding: 20px 16px 6px;
+  min-height: 45px;
+  min-width: 200px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  transition: all 0.2s linear;
+  letter-spacing: 0.08929em;
+}
+
+.Select.error .select--selected-text {
+  border-bottom-color: #e30425;
+}
+
+.Select label {
+  position: absolute;
+  top: 22px;
+  left: 16px;
+  letter-spacing: 0.08929em;
+  transition: all 0.2s linear;
+}
+
+.Select.expanded label,
+.Select.option--selected label,
+.Select.error label {
+  top: 5px;
+  font-size: 12px;
+  letter-spacing: initial;
+}
+
+.Select.expanded.color-pink label,
+.Select.selected.color-pink label {
+  color: rgb(255, 2, 102);
+}
+
+.Select.error label {
+  color: #e30425;
+}
+
+.Select.expanded.color-pink .select--selected-text,
+.Select.selected.color-pink .select--selected-text {
+  border-bottom-color: rgb(255, 2, 102);
+}
+
+.Select.expanded.color-blue,
+.Select.selected.color-blue {
+  color: rgb(0, 71, 203);
+}
+
+.Select.expanded.color-blue .select--selected-text,
+.Select.selected.color-blue .select--selected-text {
+  border-bottom-color: rgb(0, 71, 203);
+}
+
+.Select.expanded.color-yellow,
+.Select.selected.color-yellow {
+  color: rgb(255, 209, 0);
+}
+
+.Select.expanded.color-yellow .select--selected-text,
+.Select.selected.color-yellow .select--selected-text {
+  border-bottom-color: rgb(255, 209, 0);
+}
+
+.Select .CaretUpSolid {
+  position: absolute;
+  top: 22px;
+  right: 13px;
+  transition: all 0.2s linear;
+}
+
+.Select.expanded .CaretUpSolid {
+  transform: rotate(180deg);
+}

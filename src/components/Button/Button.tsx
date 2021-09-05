@@ -8,9 +8,10 @@ interface ButtonProps {
   color: "blue" | "yellow" | "pink" | "clear";
   disabled?: boolean;
   label: string;
+  handleClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, type, color, disabled, label }) => {
+const Button: React.FC<ButtonProps> = ({ className, type, color, disabled, label, handleClick }) => {
   const buttonClassNames = classnames(`Button ${className ? className : ""}`, {
     "type-text": type === "text",
     "type-outlined": type === "outlined",
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({ className, type, color, disabled, label
     "button--disabled": disabled,
   });
   return (
-    <button className={buttonClassNames}>
+    <button className={buttonClassNames} onClick={handleClick} disabled={disabled}>
       <div className="contents">
         <div className="label">{label}</div>
       </div>

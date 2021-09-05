@@ -64,7 +64,7 @@
   filter: brightness(80%);
 }
 
-.Button.type-contained:focus {
+.Button.type-contained:active {
   filter: brightness(70%);
 }
 .Button.type-outlined,
@@ -133,4 +133,16 @@
 .Button.type-outlined.color-pink:active,
 .Button.type-text.color-pink:active {
   background-color: #ff02664d;
+}
+
+.Button.button--disabled {
+  background-color: #cccccc;
+  box-shadow: none;
+  color: #ababab;
+}
+
+.Button.button--disabled:hover,
+.Button.button--disabled:focus,
+.Button.button--disabled:active {
+  filter: none;
 }

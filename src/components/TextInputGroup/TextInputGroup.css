@@ -1,0 +1,46 @@
+.TextInputGroup {
+  position: relative;
+  margin: 16px 0;
+}
+
+.TextInputGroup label {
+  position: absolute;
+  left: 16px;
+  right: initial;
+  top: 5px;
+  pointer-events: none;
+  font-size: 12px;
+}
+
+.TextInputGroup .helper {
+  padding: 0 16px;
+  font-size: 12px;
+  height: 19px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.TextInputGroup.color-pink.focused label,
+.TextInputGroup.color-pink.focused .helper {
+  color: rgb(255, 2, 102);
+}
+
+.TextInputGroup.color-blue.focused label,
+.TextInputGroup.color-blue.focused .helper {
+  color: rgb(0, 71, 203);
+}
+
+.TextInputGroup.color-yellow.focused label,
+.TextInputGroup.color-yellow.focused .helper {
+  color: rgb(255, 209, 0);
+}
+
+.TextInputGroup.error label,
+.TextInputGroup.error .helper {
+  color: #e30425;
+}
+
+.TextInputGroup.error input:focus {
+  border-bottom-color: #e30425;
+  caret-color: #e30425;
+}
