@@ -23,11 +23,7 @@ const SelectPage: React.FC = () => {
   };
 
   const cards = storyPoints.map((point) => (
-    <div
-      className={`card ${point.selected ? "selected" : ""}`}
-      key={point.value}
-      onClick={() => handleClick(point.value)}
-    >
+    <div className="card" key={point.value} onClick={() => handleClick(point.value)}>
       <div
         className="background-image"
         style={{
@@ -36,7 +32,7 @@ const SelectPage: React.FC = () => {
           }${new Date().getDay()}/200)`,
         }}
       >
-        <div>{point.value}</div>
+        <div className={`points ${point.selected ? "selected" : ""}`}>{point.value}</div>
       </div>
     </div>
   ));
