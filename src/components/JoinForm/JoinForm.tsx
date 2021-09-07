@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { io } from "socket.io-client";
 import { useHistory } from "react-router-dom";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import SelectGroup from "../SelectGroup/SelectGroup";
@@ -40,6 +41,10 @@ const JoinForm: React.FC = () => {
     });
 
     if (response && response.data && response.data.user && response.data.token) {
+      const socket = io("ws://localhost:8000");
+      socket.emit("login", () => {
+        socket.disconnect();
+      });
       setToken(response.data.token);
       setName({ value: "", touched: false });
       setOptions(defaultOptions);

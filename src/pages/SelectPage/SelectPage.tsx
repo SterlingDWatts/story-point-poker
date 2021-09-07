@@ -32,7 +32,9 @@ const SelectPage: React.FC = () => {
           }${new Date().getDay()}/200)`,
         }}
       >
-        <div className={`points ${point.selected ? "selected" : ""}`}>{point.value}</div>
+        <div className={`points-container ${point.selected ? "selected" : ""}`}>
+          <div>{point.value}</div>
+        </div>
       </div>
     </div>
   ));
@@ -46,17 +48,8 @@ const SelectPage: React.FC = () => {
       <header>
         <h1>SELECT</h1>
       </header>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div className="cards">{cards}</div>
+      <div className="cards">{cards}</div>
+      <div className="buttons">
         <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} />
       </div>
     </Page>

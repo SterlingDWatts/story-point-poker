@@ -1,26 +1,40 @@
-import React, { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext, useState } from "react";
+import { io } from "socket.io-client";
+import { Link, useHistory } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import Chip from "../../components/Chip/Chip";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import UserContext, { UserValue } from "../../contexts/UserContext";
-import { instance } from "../../services/apiService";
+import { getUsers } from "../../services/apiService";
 import "./HomePage.css";
 
 const HomePage: React.FC = () => {
-  const { loginState, getToken } = useContext(LoginContext) as LoginValue;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { loginState } = useContext(LoginContext) as LoginValue;
+  const { addUser, userState } = useContext(UserContext) as UserValue;
+  const history = useHistory();
   useEffect(() => {
-    getToken();
+    if (loginState.isLoggedIn) {
+      getUsers(setIsLoading, addUser);
+    } else {
+      history.push("/join");
+    }
   }, []);
 
-  const { addUser, userState } = useContext(UserContext) as UserValue;
   useEffect(() => {
-    instance.get("/users").then((res) => {
-      if (res && res.data && res.data.users) {
-        addUser(res.data.users);
-      }
+    const socket = io("ws://localhost:8000");
+
+    socket.on("login", () => {
+      console.log("users");
+      getUsers(setIsLoading, addUser);
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -36,15 +50,9 @@ const HomePage: React.FC = () => {
       </header>
       <div className="user-chips">{users}</div>
       <div className="buttons">
-        {loginState.isLoggedIn ? (
-          <Link to="/poker">
-            <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} />
-          </Link>
-        ) : (
-          <Link to="/join">
-            <Button type="contained" color="yellow" label="JOIN" handleClick={scrollToTop} />
-          </Link>
-        )}
+        <Link to="/poker">
+          <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} />
+        </Link>
       </div>
     </Page>
   );
