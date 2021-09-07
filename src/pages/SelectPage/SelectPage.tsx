@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
+import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
 import "./SelectPage.css";
 
 const SelectPage: React.FC = () => {
@@ -22,21 +23,8 @@ const SelectPage: React.FC = () => {
     setStoryPoints(newStoryPoints);
   };
 
-  const cards = storyPoints.map((point) => (
-    <div className="card" key={point.value} onClick={() => handleClick(point.value)}>
-      <div
-        className="background-image"
-        style={{
-          backgroundImage: `url(https://picsum.photos/seed/${
-            point.value !== "?" ? point.value : "34"
-          }${new Date().getDay()}/200)`,
-        }}
-      >
-        <div className={`points-container ${point.selected ? "selected" : ""}`}>
-          <div>{point.value}</div>
-        </div>
-      </div>
-    </div>
+  const cards = storyPoints.map(({ value, selected }) => (
+    <StoryPointCard value={value} selected={selected} handleClick={handleClick} key={value} />
   ));
 
   const buttonEnabled = storyPoints.reduce((acc: boolean, curr: { value: string; selected: boolean }): boolean => {
