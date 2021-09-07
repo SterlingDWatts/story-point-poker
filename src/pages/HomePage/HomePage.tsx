@@ -25,7 +25,11 @@ const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("ws://alluring-grand-teton-45725.herokuapp.com/poker");
+    const socket = io("https://alluring-grand-teton-45725.herokuapp.com", {
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
 
     socket.on("login", () => {
       console.log("users");
