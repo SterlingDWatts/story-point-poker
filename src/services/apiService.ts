@@ -3,8 +3,8 @@ import config from "../config";
 import { User } from "../contexts/UserContext";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:8000/poker",
-  // baseURL: config.SERVER_URL,
+  // baseURL: "http://localhost:8000/poker",
+  baseURL: config.SERVER_URL,
   headers: { Authorization: `Bearer ${config.BEARER}` },
 });
 
