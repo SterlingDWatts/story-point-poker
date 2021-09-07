@@ -41,7 +41,7 @@ const JoinForm: React.FC = () => {
     });
 
     if (response && response.data && response.data.user && response.data.token) {
-      const socket = io("ws://localhost:8000");
+      const socket = io("ws://alluring-grand-teton-45725.herokuapp.com/poker");
       socket.emit("login", () => {
         socket.disconnect();
       });

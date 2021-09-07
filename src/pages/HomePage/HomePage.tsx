@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("ws://localhost:8000");
+    const socket = io("ws://alluring-grand-teton-45725.herokuapp.com/poker");
 
     socket.on("login", () => {
       console.log("users");
