@@ -1,0 +1,16 @@
+.StoriesPage .top .CaretUpSolid {
+  color: #ababab;
+}
+
+.StoriesPage header {
+  color: #0047cb;
+}
+
+.StoriesPage .bottom .CaretDownSolid {
+  color: #ababab;
+}
+
+.StoriesPage .Fab {
+  position: relative;
+  top: -19px;
+}

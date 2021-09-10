@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
@@ -38,7 +39,9 @@ const SelectPage: React.FC = () => {
       </header>
       <div className="cards">{cards}</div>
       <div className="buttons">
-        <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} />
+        <Link to="/results">
+          <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} />
+        </Link>
       </div>
     </Page>
   );

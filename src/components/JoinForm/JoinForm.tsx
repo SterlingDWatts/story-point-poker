@@ -60,7 +60,6 @@ const JoinForm: React.FC = () => {
       <div className="inputs">
         <TextInputGroup
           label="Name"
-          placeholder="e.g. Sterling"
           helper="First Name"
           color="pink"
           value={name.value}

@@ -3,6 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 60px;
 }
@@ -19,6 +20,11 @@
 
 .Page.color-pink {
   background-color: rgb(255, 2, 102);
+  color: white;
+}
+
+.Page.color-very-dark-blue {
+  background-color: #1e1e2e;
   color: white;
 }
 

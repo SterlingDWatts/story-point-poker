@@ -9,3 +9,9 @@
   align-content: stretch;
   gap: 16px;
 }
+
+.HomePage .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

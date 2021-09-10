@@ -17,7 +17,7 @@
   border: none;
 }
 
-.Button.Button.type-outlined {
+.Button.type-outlined {
   border-width: 1px;
   border-style: solid;
 }

@@ -6,10 +6,18 @@
 .TextInputGroup label {
   position: absolute;
   left: 16px;
+  top: 22px;
   right: initial;
-  top: 5px;
   pointer-events: none;
+  letter-spacing: 0.08929em;
+  transition: all 0.1s linear;
+}
+
+.TextInputGroup.focused label,
+.TextInputGroup.small-label label {
+  top: 5px;
   font-size: 12px;
+  letter-spacing: initial;
 }
 
 .TextInputGroup .helper {

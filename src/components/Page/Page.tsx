@@ -6,7 +6,7 @@ interface PageProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children?: any;
   className?: string;
-  color?: "blue" | "yellow" | "pink";
+  color?: "blue" | "yellow" | "pink" | "veryDarkBlue";
 }
 
 const Page: React.FC<PageProps> = ({ className, children, color }) => {
@@ -14,6 +14,7 @@ const Page: React.FC<PageProps> = ({ className, children, color }) => {
     "color-blue": color === "blue",
     "color-yellow": color === "yellow",
     "color-pink": color === "pink",
+    "color-very-dark-blue": color === "veryDarkBlue",
   });
 
   return <div className={pageClassNames}> {children} </div>;

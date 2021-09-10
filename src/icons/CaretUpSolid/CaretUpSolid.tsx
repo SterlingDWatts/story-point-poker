@@ -7,9 +7,10 @@ interface CaretUpSolidProps {
   width: string;
   color?: "blue" | "yellow" | "pink" | "red";
   className?: string;
+  handleClick?: (e: React.MouseEvent<SVGElement>) => void;
 }
 
-const CaretUpSolid: React.FC<CaretUpSolidProps> = ({ height, width, color, className }) => {
+const CaretUpSolid: React.FC<CaretUpSolidProps> = ({ height, width, color, className, handleClick }) => {
   const caretUpSolidClassNames = classnames(
     `CaretUpSolid svg-inline--fa fa-caret-up fa-w-10 ${className ? className : ""}`,
     {
@@ -30,6 +31,7 @@ const CaretUpSolid: React.FC<CaretUpSolidProps> = ({ height, width, color, class
       role="img"
       viewBox="0 0 320 512"
       style={{ height, width }}
+      onClick={handleClick}
     >
       <path
         fill="currentColor"

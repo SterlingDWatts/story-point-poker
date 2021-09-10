@@ -53,6 +53,9 @@ const HomePage: React.FC = () => {
         <Link to="/poker">
           <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} />
         </Link>
+        <Link to="/stories">
+          <Button type="text" color="yellow" label="STORIES" handleClick={scrollToTop} />
+        </Link>
       </div>
     </Page>
   );

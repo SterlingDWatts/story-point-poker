@@ -40,6 +40,7 @@ const TextInputGroup: React.FC<TextInputGroupProps> = ({
     "color-yellow": color === "yellow",
     focused: isFocused,
     error: errorValidation,
+    "small-label": value && value.length > 0,
   });
 
   return (
