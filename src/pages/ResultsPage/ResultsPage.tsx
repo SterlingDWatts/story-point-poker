@@ -7,14 +7,14 @@ import "./ResultsPage.css";
 const ResultsPage: React.FC = () => {
   const { userState } = useContext(UserContext) as UserValue;
 
-  const users = userState.map((user: User) => {
+  const users = userState.map((user: User, idx) => {
     return (
-      <>
-        <div className="user" key={user.name} style={{ height: "54px" }}>
+      <div key={idx} style={{ display: "flex" }}>
+        <div className="user" style={{ height: "54px", flex: 1 }}>
           {user.name}
         </div>
         <div className="points">3</div>
-      </>
+      </div>
     );
   });
 
@@ -23,10 +23,7 @@ const ResultsPage: React.FC = () => {
       <header>
         <h1>Results</h1>
       </header>
-      <div
-        className="results"
-        style={{ fontSize: "24px", display: "grid", gridTemplateColumns: "auto 24px", width: "100%" }}
-      >
+      <div className="results" style={{ fontSize: "24px", display: "flex", flexDirection: "column", width: "100%" }}>
         {users}
       </div>
       <div>

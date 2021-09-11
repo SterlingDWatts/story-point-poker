@@ -1,58 +1,79 @@
-export {};
-// import React, { createContext, useState } from "react";
-// import { io } from "socket.io-client";
-// import { instance } from "../services/apiService";
+import React, { createContext, useState } from "react";
+import { io } from "socket.io-client";
+import config from "../config";
 
-// type PokerRole = "Front End Dev" | "QAE" | "Team Lead";
+export type PokerRole = "Front End Dev" | "QAE" | "Team Lead";
 
-// type PossiblePoints = "1" | "2" | "3" | "5" | "8" | "13" | "21" | "?";
+export interface PokerUser {
+  _id: number;
+  name: string;
+  role: PokerRole;
+}
 
-// interface PokerUser {
-//   _id: number;
-//   name: string;
-//   role: PokerRole;
-// }
+interface PokerStory {
+  _id: number;
+  name: string;
+}
 
-// interface PokerStory {
-//   _id: number;
-//   name: string;
-// }
+type Login = (user: Partial<PokerUser>) => void;
 
-// interface PokerPoints {
-//   _id: number;
-//   points: PossiblePoints;
-//   userId: number;
-//   storyId: number;
-// }
+type OnDisconnect = (cb: () => void) => void;
 
-// const PokerContext = createContext(null);
+type AddStories = (stories: Partial<PokerStory>[]) => void;
 
-// const socket = io("https://alluring-grand-teton-45725.herokuapp.com");
+type OnLogin = (cb: () => void) => void;
 
-// export const PokerProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
-//   const [userState, setUserState] = useState([]);
+type OnAddStories = (cb: () => void) => void;
 
-//   const login = (user: Partial<PokerUser>) => {
-//     socket.emit("login", user);
-//   };
+export interface PokerValue {
+  login: Login;
+  addStories: AddStories;
+  onLogin: OnLogin;
+  onAddStories: OnAddStories;
+  onDisconnect: OnDisconnect;
+}
 
-//   const getNewUserState = (users: PokerUser[]) => {
-//     setUserState(users);
-//   };
+const PokerContext = createContext<PokerValue>({
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  login: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  addStories: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onLogin: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onAddStories: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onDisconnect: () => {},
+});
 
-//   const addStory = (story: Partial<PokerStory>) => {
-//     socket.emit("addStory", story);
-//   };
+export const PokerProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+  const [socket] = useState(io(config.SERVER_URL));
 
-//   socket.on("addedUser", (users: PokerUser[]) => {
-//     getNewUserState(users);
-//   });
+  const login: Login = (user) => {
+    socket.emit("login", user);
+  };
 
-//   socket.on("addedStory", () => {
-//     setNewStoryState();
-//   });
+  const onDisconnect: OnDisconnect = (cb) => {
+    socket.on("disconnected", cb);
+  };
 
-//   return <PokerContext.Provider value={{ userState, login }}>{children}</PokerContext.Provider>;
-// };
+  const addStories: AddStories = (stories) => {
+    socket.emit("addStories", stories);
+  };
 
-// export default PokerContext;
+  const onLogin: OnLogin = (cb) => {
+    socket.on("login", cb);
+  };
+
+  const onAddStories: OnAddStories = (cb) => {
+    socket.on("addStories", cb);
+  };
+
+  return (
+    <PokerContext.Provider value={{ login, addStories, onLogin, onAddStories, onDisconnect }}>
+      {children}
+    </PokerContext.Provider>
+  );
+};
+
+export default PokerContext;

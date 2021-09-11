@@ -1,18 +1,24 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import config from "../config";
 import { User } from "../contexts/UserContext";
+import { Story } from "../pages/StoriesPage/StoriesPage";
+
+interface UserRes {
+  users: User[];
+}
 
 export const instance = axios.create({
-  // baseURL: "http://localhost:8000/poker",
-  baseURL: config.SERVER_URL,
+  baseURL: config.SERVER_URL + "/poker",
   headers: { Authorization: `Bearer ${config.BEARER}` },
 });
 
-export const getUsers = (setIsLoading: (isLoading: boolean) => void, addUser: (users: User[]) => void): void => {
-  instance.get("/users").then((res) => {
-    setIsLoading(false);
-    if (res && res.data && res.data.users) {
-      addUser(res.data.users);
-    }
-  });
-};
+interface StoriesRes {
+  stories: Story[];
+}
+
+export const getUsers = (): Promise<AxiosResponse<UserRes>> => instance.get("/users");
+
+export const getStories = (): Promise<AxiosResponse<StoriesRes>> => instance.get("/stories");
+
+export const postStories = (stories: Story[]): Promise<AxiosResponse<Story[]>> =>
+  instance.post("/stories", { stories });

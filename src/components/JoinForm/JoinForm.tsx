@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { io } from "socket.io-client";
 import { useHistory } from "react-router-dom";
 import TextInputGroup from "../TextInputGroup/TextInputGroup";
 import SelectGroup from "../SelectGroup/SelectGroup";
 import Button from "../Button/Button";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
+import PokerContext, { PokerUser } from "../../contexts/PokerContext";
 import { defaultOptions, validateName, validateRole } from "./JoinFormHelper";
 import { instance } from "../../services/apiService";
 import "./JoinForm.css";
@@ -20,31 +20,20 @@ const JoinForm: React.FC = () => {
     setOptions({ ...options, selectedValue: value, touched: true });
   };
 
-  const twoHoursFromNow = () => {
-    const dt = new Date();
-    dt.setHours(dt.getHours() + 2);
-    return dt;
-  };
-
   const history = useHistory();
   const { setToken } = useContext(LoginContext) as LoginValue;
+  const { login } = useContext(PokerContext);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const user = { name: name.value, role: options.selectedValue, isLoggedIn: true } as Partial<PokerUser>;
     const response = await instance({
       url: "/login",
       method: "POST",
-      data: {
-        name: name.value,
-        role: options.selectedValue,
-        expDate: twoHoursFromNow(),
-      },
+      data: user,
     });
 
     if (response && response.data && response.data.user && response.data.token) {
-      const socket = io("https://alluring-grand-teton-45725.herokuapp.com");
-      socket.emit("login", () => {
-        socket.disconnect();
-      });
+      login(user);
       setToken(response.data.token);
       setName({ value: "", touched: false });
       setOptions(defaultOptions);

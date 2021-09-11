@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Page from "../../components/Page/Page";
 import TextInputGroup from "../../components/TextInputGroup/TextInputGroup";
 import Fab from "../../icons/Fab/Fab";
@@ -8,26 +8,36 @@ import TrashAltRegular from "../../icons/TrashAltRegular/TrashAltRegular";
 import CaretUpSolid from "../../icons/CaretUpSolid/CaretUpSolid";
 import CaretDownSolid from "../../icons/CaretDownSolid/CaretDownSolid";
 import Button from "../../components/Button/Button";
+import { postStories } from "../../services/apiService";
+import PokerContext from "../../contexts/PokerContext";
 import "./StoriesPage.css";
 
+export interface Story {
+  title: string;
+  _id: number;
+  dateAdded: Date;
+}
+
+export type Stories = Story[];
+
 const StoriesPage: React.FC = () => {
-  const [stories, setStories] = useState<{ title: string; id: number }[]>([]);
+  const [stories, setStories] = useState<Stories>([]);
 
   const [storyName, setStoryName] = useState<string>("");
 
-  const editStory = (storyToEdit: { title: string; id: number }) => {
-    const filteredStories = stories.filter((story: { title: string; id: number }) => story.id !== storyToEdit.id);
+  const editStory = (storyToEdit: Story) => {
+    const filteredStories = stories.filter((story: Story) => story._id !== storyToEdit._id);
     setStories([...filteredStories]);
     setStoryName(storyToEdit.title);
   };
 
-  const deleteStory = (storyId: number) => {
-    const filteredStories = stories.filter((story: { title: string; id: number }) => story.id !== storyId);
+  const deleteStory = (id: number) => {
+    const filteredStories = stories.filter((story: Story) => story._id !== id);
     setStories([...filteredStories]);
   };
 
   const addStory = (name: string) => {
-    setStories([...stories, { title: name, id: Math.random() * 100 }]);
+    setStories([...stories, { title: name, _id: Math.random() * 100, dateAdded: new Date() }]);
     setStoryName("");
   };
 
@@ -51,21 +61,27 @@ const StoriesPage: React.FC = () => {
     }
   };
 
-  const storyComponents = stories.map((story: { title: string; id: number }, idx) => {
+  const storyComponents = stories.map((story: Story, idx) => {
     return (
       <div
         className={`${idx === 0 ? "top" : ""} ${idx === stories.length - 1 ? "bottom" : ""}`}
-        key={story.id}
+        key={story._id}
         style={{ display: "flex", gap: "16px", margin: "16px 0px" }}
       >
         <CaretUpSolid width="16px" height="16px" handleClick={() => moveUp(idx)} />
         <CaretDownSolid width="16px" height="16px" handleClick={() => moveDown(idx)} />
         <div style={{ flex: "1", minHeight: "45px" }}>{story.title}</div>
         <PencilRegular height="16px" handleClick={() => editStory(story)} />
-        <TrashAltRegular height="16px" handleClick={() => deleteStory(story.id)} />
+        <TrashAltRegular height="16px" handleClick={() => deleteStory(story._id)} />
       </div>
     );
   });
+
+  const { addStories } = useContext(PokerContext);
+  const handleSubmit = () => {
+    postStories(stories);
+    addStories(stories);
+  };
 
   return (
     <Page className="StoriesPage">
@@ -95,7 +111,7 @@ const StoriesPage: React.FC = () => {
           <div>{storyComponents}</div>
         </div>
       </div>
-      <Button label="SAVE" type="outlined" color="blue" />
+      <Button label="SAVE" type="outlined" color="blue" handleClick={handleSubmit} />
     </Page>
   );
 };

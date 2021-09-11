@@ -4,6 +4,7 @@
 
 .StoriesPage header {
   color: #0047cb;
+  width: 100%;
 }
 
 .StoriesPage .bottom .CaretDownSolid {

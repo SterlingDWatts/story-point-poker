@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import { io } from "socket.io-client";
 import { Link, useHistory } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
@@ -10,30 +9,32 @@ import { getUsers } from "../../services/apiService";
 import "./HomePage.css";
 
 const HomePage: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(true);
 
   const { loginState } = useContext(LoginContext) as LoginValue;
   const { addUser, userState } = useContext(UserContext) as UserValue;
+
+  const getAndAddUsers = async (isSubscribed: boolean) => {
+    const response = await getUsers();
+    if (isSubscribed) {
+      setIsLoading(false);
+      if (response && response.data && response.data.users) {
+        addUser(response.data.users);
+      }
+    }
+  };
+
   const history = useHistory();
   useEffect(() => {
+    let isSubscribed = true;
     if (loginState.isLoggedIn) {
-      getUsers(setIsLoading, addUser);
+      getAndAddUsers(isSubscribed);
     } else {
       history.push("/join");
     }
-  }, []);
-
-  useEffect(() => {
-    const socket = io("https://alluring-grand-teton-45725.herokuapp.com");
-
-    socket.on("login", () => {
-      console.log("users");
-      getUsers(setIsLoading, addUser);
-    });
 
     return () => {
-      socket.disconnect();
+      isSubscribed = false;
     };
   }, []);
 
@@ -51,7 +52,7 @@ const HomePage: React.FC = () => {
       <div className="user-chips">{users}</div>
       <div className="buttons">
         <Link to="/poker">
-          <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} />
+          <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} disabled={isLoading} />
         </Link>
         <Link to="/stories">
           <Button type="text" color="yellow" label="STORIES" handleClick={scrollToTop} />

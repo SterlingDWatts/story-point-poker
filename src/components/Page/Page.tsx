@@ -3,8 +3,7 @@ import classnames from "classnames";
 import "./Page.css";
 
 interface PageProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children?: any;
+  children?: JSX.Element[];
   className?: string;
   color?: "blue" | "yellow" | "pink" | "veryDarkBlue";
 }
@@ -17,7 +16,7 @@ const Page: React.FC<PageProps> = ({ className, children, color }) => {
     "color-very-dark-blue": color === "veryDarkBlue",
   });
 
-  return <div className={pageClassNames}> {children} </div>;
+  return <div className={pageClassNames}>{children}</div>;
 };
 
 export default Page;
