@@ -1,0 +1,15 @@
+.TextWithEditDelete {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0px;
+
+  .title {
+    flex: 1;
+    min-height: 45px;
+  }
+
+  .top .CaretUpSolid,
+  .bottom .CaretDownSolid {
+    color: #ababab;
+  }
+}

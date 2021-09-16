@@ -1,10 +1,10 @@
 import React, { createContext, useReducer } from "react";
 
 export interface User {
-  _id: number;
+  _id: string;
   name: string;
   role: string;
-  expDate: Date;
+  isLoggedIn: boolean;
 }
 
 type UserState = User[];
@@ -18,7 +18,7 @@ export interface UserValue {
   userState: UserState;
   addUser: (users: User[]) => void;
   clearUsers: () => void;
-  removeUser: (_id: number) => void;
+  removeUser: (_id: string) => void;
   editUser: (user: User) => void;
 }
 
@@ -49,11 +49,11 @@ export const UserProvider: React.FC<{ children: JSX.Element }> = ({ children }) 
   };
 
   const clearUsers = () => {
-    dispatch({ type: "clear-users", payload: [{ _id: 1, name: "", role: "QAE", expDate: new Date() }] });
+    dispatch({ type: "clear-users", payload: [{ _id: "1", name: "", role: "QAE", isLoggedIn: false }] });
   };
 
-  const removeUser = (userId: number) => {
-    dispatch({ type: "remove-user", payload: [{ _id: userId, name: "", role: "QAE", expDate: new Date() }] });
+  const removeUser = (userId: string) => {
+    dispatch({ type: "remove-user", payload: [{ _id: userId, name: "", role: "QAE", isLoggedIn: false }] });
   };
 
   const editUser = (user: User) => {

@@ -5,14 +5,16 @@ import config from "../config";
 export type PokerRole = "Front End Dev" | "QAE" | "Team Lead";
 
 export interface PokerUser {
-  _id: number;
+  _id: string;
   name: string;
   role: PokerRole;
 }
 
 interface PokerStory {
-  _id: number;
+  _id: string;
   name: string;
+  position: number;
+  dateAdded: Date;
 }
 
 type Login = (user: Partial<PokerUser>) => void;
@@ -25,12 +27,18 @@ type OnLogin = (cb: () => void) => void;
 
 type OnAddStories = (cb: () => void) => void;
 
+type AddPoints = () => void;
+
+type OnAddPoints = (cb: () => void) => void;
+
 export interface PokerValue {
   login: Login;
   addStories: AddStories;
   onLogin: OnLogin;
   onAddStories: OnAddStories;
   onDisconnect: OnDisconnect;
+  addPoints: AddPoints;
+  onAddPoints: OnAddPoints;
 }
 
 const PokerContext = createContext<PokerValue>({
@@ -44,6 +52,10 @@ const PokerContext = createContext<PokerValue>({
   onAddStories: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onDisconnect: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  addPoints: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onAddPoints: () => {},
 });
 
 export const PokerProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -69,8 +81,16 @@ export const PokerProvider: React.FC<{ children: JSX.Element }> = ({ children })
     socket.on("addStories", cb);
   };
 
+  const addPoints: AddPoints = () => {
+    socket.emit("points");
+  };
+
+  const onAddPoints: OnAddPoints = (cb) => {
+    socket.on("points", cb);
+  };
+
   return (
-    <PokerContext.Provider value={{ login, addStories, onLogin, onAddStories, onDisconnect }}>
+    <PokerContext.Provider value={{ login, addStories, onLogin, onAddStories, onDisconnect, addPoints, onAddPoints }}>
       {children}
     </PokerContext.Provider>
   );

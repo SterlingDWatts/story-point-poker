@@ -1,34 +1,28 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import Chip from "../../components/Chip/Chip";
-import LoginContext, { LoginValue } from "../../contexts/LoginContext";
+import LoginContext from "../../contexts/LoginContext";
 import UserContext, { UserValue } from "../../contexts/UserContext";
+import StoryContext from "../../contexts/StoryContext";
 import { getUsers } from "../../services/apiService";
 import "./HomePage.css";
 
 const HomePage: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const { loginState } = useContext(LoginContext) as LoginValue;
-  const { addUser, userState } = useContext(UserContext) as UserValue;
-
-  const getAndAddUsers = async (isSubscribed: boolean) => {
-    const response = await getUsers();
-    if (isSubscribed) {
-      setIsLoading(false);
-      if (response && response.data && response.data.users) {
-        addUser(response.data.users);
-      }
-    }
-  };
+  const { loginState } = useContext(LoginContext);
+  const { userState, addUser } = useContext(UserContext) as UserValue;
+  const { stories } = useContext(StoryContext);
 
   const history = useHistory();
   useEffect(() => {
     let isSubscribed = true;
     if (loginState.isLoggedIn) {
-      getAndAddUsers(isSubscribed);
+      getUsers().then((response) => {
+        if (isSubscribed && response && response.data && response.data.users) {
+          addUser(response.data.users);
+        }
+      });
     } else {
       history.push("/join");
     }
@@ -51,8 +45,14 @@ const HomePage: React.FC = () => {
       </header>
       <div className="user-chips">{users}</div>
       <div className="buttons">
-        <Link to="/poker">
-          <Button type="contained" color="yellow" label="START" handleClick={scrollToTop} disabled={isLoading} />
+        <Link to={stories.length === 0 ? "/" : "/poker/0"}>
+          <Button
+            type="contained"
+            color="yellow"
+            label="START"
+            handleClick={scrollToTop}
+            disabled={stories.length === 0}
+          />
         </Link>
         <Link to="/stories">
           <Button type="text" color="yellow" label="STORIES" handleClick={scrollToTop} />

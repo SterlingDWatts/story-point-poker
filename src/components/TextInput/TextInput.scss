@@ -1,0 +1,38 @@
+@import "../../App.scss";
+
+.TextInput {
+  min-width: 300px;
+  font-size: 16px;
+  padding: 20px 16px 6px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  background-color: rgba(0, 0, 0, 0.05);
+  outline: none;
+  letter-spacing: 0.08929em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  &.color-pink {
+    caret-color: $main-pink;
+
+    &:focus {
+      border-bottom-color: $main-pink;
+    }
+  }
+
+  &.color-blue {
+    caret-color: $main-blue;
+
+    &:focus {
+      border-bottom-color: $main-blue;
+    }
+  }
+
+  &.color-yellow {
+    caret-color: $main-yellow;
+
+    &:focus {
+      border-bottom-color: $main-yellow;
+    }
+  }
+}

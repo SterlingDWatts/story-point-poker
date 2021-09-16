@@ -1,3 +1,8 @@
+.SelectPage.Page h1 {
+  font-size: 30px;
+  min-height: initial;
+}
+
 .SelectPage .cards {
   width: 100%;
   display: grid;

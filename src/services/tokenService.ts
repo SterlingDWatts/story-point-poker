@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
+import { User } from "../contexts/UserContext";
 import config from "../config";
 
 const tokenService = {
@@ -8,18 +8,20 @@ const tokenService = {
     return window.sessionStorage.getItem(config.TOKEN_KEY!);
   },
 
-  parseToken(): jwt.Jwt | undefined {
-    const token = this.getItem();
+  parseToken(token: string): User | undefined {
     if (token) {
-      return jwtDecode(token) as jwt.Jwt;
+      return jwtDecode(token) as User;
     }
   },
 
-  getToken(): jwt.Jwt | undefined {
-    return this.parseToken();
+  getToken(): User | undefined {
+    const token = this.getItem();
+    if (token) {
+      return JSON.parse(token);
+    }
   },
 
-  setToken(token: jwt.Jwt): void {
+  setToken(token: User): void {
     window.sessionStorage.setItem(config.TOKEN_KEY!, JSON.stringify(token));
   },
 

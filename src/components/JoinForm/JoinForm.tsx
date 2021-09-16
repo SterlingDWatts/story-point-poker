@@ -6,8 +6,8 @@ import Button from "../Button/Button";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import PokerContext, { PokerUser } from "../../contexts/PokerContext";
 import { defaultOptions, validateName, validateRole } from "./JoinFormHelper";
-import { instance } from "../../services/apiService";
-import "./JoinForm.css";
+import { postUser } from "../../services/apiService";
+import "./JoinForm.scss";
 
 const JoinForm: React.FC = () => {
   const [name, setName] = useState({ value: "", touched: false });
@@ -26,11 +26,7 @@ const JoinForm: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const user = { name: name.value, role: options.selectedValue, isLoggedIn: true } as Partial<PokerUser>;
-    const response = await instance({
-      url: "/login",
-      method: "POST",
-      data: user,
-    });
+    const response = await postUser(user);
 
     if (response && response.data && response.data.user && response.data.token) {
       login(user);

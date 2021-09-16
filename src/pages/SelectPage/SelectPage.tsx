@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
+import StoryContext from "../../contexts/StoryContext";
+import LoginContext from "../../contexts/LoginContext";
+import { postPoints } from "../../services/apiService";
 import "./SelectPage.css";
 
 const SelectPage: React.FC = () => {
@@ -16,6 +19,13 @@ const SelectPage: React.FC = () => {
     { value: "21", selected: false },
     { value: "?", selected: false },
   ]);
+
+  const { loginState } = useContext(LoginContext);
+  const { stories } = useContext(StoryContext);
+  const { idx } = useParams<{ idx: string }>();
+  const currentStory = stories[+idx];
+
+  const history = useHistory();
 
   const handleClick = (value: string) => {
     const newStoryPoints = storyPoints.map((point) =>
@@ -32,16 +42,28 @@ const SelectPage: React.FC = () => {
     return acc || curr.selected;
   }, false);
 
+  if (!currentStory) {
+    history.push("/");
+    return <div></div>;
+  }
+
+  const handleSubmit = async () => {
+    const selected = storyPoints.find((point) => point.selected);
+    if (buttonEnabled && selected) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      await postPoints(currentStory._id, loginState.token!._id, selected.value);
+      history.push(`/results/${idx}`);
+    }
+  };
+
   return (
     <Page className="SelectPage" color="yellow">
       <header>
-        <h1>SELECT</h1>
+        <h1>{currentStory.title}</h1>
       </header>
       <div className="cards">{cards}</div>
       <div className="buttons">
-        <Link to="/results">
-          <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} />
-        </Link>
+        <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} handleClick={handleSubmit} />
       </div>
     </Page>
   );

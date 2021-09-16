@@ -1,39 +1,48 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createContext, useReducer } from "react";
-import jwt from "jsonwebtoken";
+import { User } from "../contexts/UserContext";
 import tokenService from "../services/tokenService";
 
 interface State {
   isLoggedIn: boolean;
-  token: jwt.Jwt | string | null | undefined;
+  token: User | null | undefined;
 }
 
 interface Action {
   type: "get-token" | "set-token" | "logout";
-  payload?: jwt.Jwt | undefined;
+  payload?: string | undefined;
 }
 
 export interface LoginValue {
   loginState: State;
   getToken: () => void;
-  setToken: (token: jwt.Jwt) => void;
+  setToken: (token: string) => void;
   logout: () => void;
 }
 
 type LoginReducer = (state: State, action: Action) => State;
 
-const LoginContext = createContext<LoginValue | null>(null);
+const LoginContext = createContext<LoginValue>({
+  loginState: { isLoggedIn: false, token: null },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  getToken: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setToken: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  logout: () => {},
+});
 
 const LoginStateReducer: LoginReducer = (state, action) => {
-  let token: jwt.Jwt | null | undefined;
+  let token: User | null | undefined;
   switch (action.type) {
     case "get-token":
       token = tokenService.getToken();
       return token ? { isLoggedIn: true, token } : state;
 
     case "set-token":
-      tokenService.setToken(action.payload as jwt.Jwt);
-      return { isLoggedIn: true, token: action.payload };
+      token = tokenService.parseToken(action.payload as string) as User;
+      tokenService.setToken(token);
+      return { isLoggedIn: true, token };
 
     case "logout":
       tokenService.removeItem();
@@ -51,7 +60,7 @@ export const LoginProvider: React.FC<{ children: JSX.Element }> = ({ children })
     dispatch({ type: "get-token" });
   };
 
-  const setToken = (token: jwt.Jwt) => {
+  const setToken = (token: string) => {
     dispatch({ type: "set-token", payload: token });
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./StoryPointCard.css";
+import "./StoryPointCard.scss";
 
 interface StoryPointCardProps {
   value: string;
