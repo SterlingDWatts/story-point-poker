@@ -6,13 +6,13 @@ import Chip from "../../components/Chip/Chip";
 import LoginContext from "../../contexts/LoginContext";
 import UserContext, { UserValue } from "../../contexts/UserContext";
 import StoryContext from "../../contexts/StoryContext";
-import { getUsers } from "../../services/apiService";
+import { getUsers, getStories } from "../../services/apiService";
 import "./HomePage.css";
 
 const HomePage: React.FC = () => {
   const { loginState } = useContext(LoginContext);
   const { userState, addUser } = useContext(UserContext) as UserValue;
-  const { stories } = useContext(StoryContext);
+  const { stories, addStories } = useContext(StoryContext);
 
   const history = useHistory();
   useEffect(() => {
@@ -26,6 +26,23 @@ const HomePage: React.FC = () => {
     } else {
       history.push("/join");
     }
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
+
+  const getAndAddStories = async (subscribed: boolean) => {
+    const response = await getStories();
+    if (response && response.data && response.data.stories && subscribed) {
+      addStories(response.data.stories);
+    }
+  };
+
+  useEffect(() => {
+    let isSubscribed = true;
+
+    getAndAddStories(isSubscribed);
 
     return () => {
       isSubscribed = false;
