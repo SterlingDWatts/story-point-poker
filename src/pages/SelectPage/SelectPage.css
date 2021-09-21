@@ -9,3 +9,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
+
+.SelectPage .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}

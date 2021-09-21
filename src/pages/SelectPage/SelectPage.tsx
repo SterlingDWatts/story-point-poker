@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import Page from "../../components/Page/Page";
 import Button from "../../components/Button/Button";
 import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
@@ -64,6 +64,9 @@ const SelectPage: React.FC = () => {
       <div className="cards">{cards}</div>
       <div className="buttons">
         <Button type="contained" label="SUBMIT" color="pink" disabled={!buttonEnabled} handleClick={handleSubmit} />
+        <Link to="/">
+          <Button type="text" label="HOME" color="pink" />
+        </Link>
       </div>
     </Page>
   );
