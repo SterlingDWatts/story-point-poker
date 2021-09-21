@@ -114,35 +114,33 @@ const StoriesPage: React.FC = () => {
 
   return (
     <Page className="StoriesPage">
-      <div>
-        <header>
-          <h1>User Stories</h1>
-        </header>
-        <div className="stories">
-          <form
-            action="submit"
-            style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
+      <header>
+        <h1>User Stories</h1>
+      </header>
+      <div className="stories">
+        <form
+          action="submit"
+          style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <TextInputGroup
+            label="Story"
+            value={storyName}
+            handleChange={(event) => setStoryName(event.target.value)}
+            color="blue"
+            helper="Brief description"
+          />
+          <Fab
+            handleClick={() => addStory(storyName, stories.length === 0 ? 0 : stories.length)}
+            type="outlined"
+            color="blue"
           >
-            <TextInputGroup
-              label="Story"
-              value={storyName}
-              handleChange={(event) => setStoryName(event.target.value)}
-              color="blue"
-              helper="Brief description"
-            />
-            <Fab
-              handleClick={() => addStory(storyName, stories.length === 0 ? 0 : stories.length)}
-              type="outlined"
-              color="blue"
-            >
-              <PlusRegular height="16px" width="16px" />
-            </Fab>
-          </form>
-          <div>{storyComponents}</div>
-        </div>
+            <PlusRegular height="16px" width="16px" />
+          </Fab>
+        </form>
+        <div>{storyComponents}</div>
       </div>
       <div className="buttons">
         <Button label="SAVE" type="outlined" color="blue" handleClick={handleSubmit} />

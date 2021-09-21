@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import "./Page.css";
+import "./Page.scss";
 
 interface PageProps {
   children?: JSX.Element[];
@@ -16,7 +16,11 @@ const Page: React.FC<PageProps> = ({ className, children, color }) => {
     "color-very-dark-blue": color === "veryDarkBlue",
   });
 
-  return <div className={pageClassNames}>{children}</div>;
+  return (
+    <div className={pageClassNames}>
+      <div className="contents">{children}</div>
+    </div>
+  );
 };
 
 export default Page;

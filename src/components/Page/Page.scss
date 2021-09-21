@@ -1,0 +1,49 @@
+@import "../../App.scss";
+
+.Page {
+  padding: 60px 16px;
+  min-height: 100vh;
+  width: 100%;
+
+  & > .contents {
+    width: 100%;
+    max-width: 1000px;
+    min-height: calc(100vh - 120px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+  }
+
+  &.color-blue {
+    background-color: $main-blue;
+    color: white;
+  }
+
+  &.color-yellow {
+    background-color: $main-yellow;
+    color: black;
+  }
+
+  &.color-pink {
+    background-color: $main-pink;
+    color: white;
+  }
+
+  &.color-very-dark-blue {
+    background-color: #1e1e2e;
+    color: white;
+  }
+
+  header {
+    align-self: flex-start;
+  }
+
+  h1 {
+    min-height: 60px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
