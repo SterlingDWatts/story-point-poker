@@ -1,12 +1,13 @@
 @import "../../App.scss";
 
 .StoryPointCard {
-  padding-top: 100%;
+  padding-top: calc(100% / 2.5 * 3.5);
   position: relative;
   font-size: 16px;
   font-weight: 500;
   border-radius: 4px;
   overflow: hidden;
+  background-color: white;
 
   &:nth-child(even) .points-container.selected {
     background-color: $main-blue;
@@ -18,11 +19,13 @@
 
   .background-image {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
     background-size: cover;
+    border-radius: 4px;
+    overflow: hidden;
   }
 
   .points-container {
@@ -40,16 +43,27 @@
       filter: brightness(90%);
     }
 
-    div {
-      height: 30px;
-      width: 30px;
-      border-radius: 15px;
+    .points {
+      position: absolute;
+      height: 25px;
+      width: 25px;
       background-color: white;
-      border: 1px solid rgba(0, 0, 0, 0.42);
       display: flex;
       justify-content: center;
       align-items: center;
       transition: all 0.1s linear;
+      border-bottom-left-radius: 4px;
+    }
+
+    .points:nth-child(1) {
+      top: 0;
+      right: 0;
+    }
+
+    .points:nth-child(2) {
+      bottom: 0;
+      left: 0;
+      transform: scale(-1, -1);
     }
 
     &.selected {
@@ -57,7 +71,7 @@
       color: white;
       font-weight: 600;
 
-      div {
+      .points {
         border-color: rgba(0, 0, 0, 0);
         background-color: rgba(0, 0, 0, 0);
       }

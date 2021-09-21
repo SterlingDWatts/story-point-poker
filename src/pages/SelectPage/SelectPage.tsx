@@ -35,7 +35,7 @@ const SelectPage: React.FC = () => {
   };
 
   const cards = storyPoints.map(({ value, selected }) => (
-    <StoryPointCard value={value} selected={selected} handleClick={handleClick} key={value} />
+    <StoryPointCard value={value} selected={selected} handleClick={handleClick} key={value} storyNumber={idx} />
   ));
 
   const buttonEnabled = storyPoints.reduce((acc: boolean, curr: { value: string; selected: boolean }): boolean => {

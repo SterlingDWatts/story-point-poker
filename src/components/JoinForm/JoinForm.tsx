@@ -62,12 +62,14 @@ const JoinForm: React.FC = () => {
           required
         />
       </div>
-      <Button
-        type="contained"
-        label="SUBMIT"
-        color="pink"
-        disabled={!name.touched || !options.touched || !!nameValidation || !!roleValidation}
-      />
+      <div className="buttons">
+        <Button
+          type="contained"
+          label="SUBMIT"
+          color="pink"
+          disabled={!name.touched || !options.touched || !!nameValidation || !!roleValidation}
+        />
+      </div>
     </form>
   );
 };
