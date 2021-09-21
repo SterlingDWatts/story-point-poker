@@ -1,16 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import StoryContext from "../../contexts/StoryContext";
 import { getPoints } from "../../services/apiService";
 import PokerContext from "../../contexts/PokerContext";
 import UserContext, { User, UserValue } from "../../contexts/UserContext";
 import Page from "../../components/Page/Page";
 import Result from "../../components/Result/Result";
-import BottomNav from "../../components/BottomNav/BottomNav";
-import CaretLeftSolid from "../../icons/CaretLeftSolid/CaretLeftSolid";
-import CaretRightSolid from "../../icons/CaretRightSolid/CaretRightSolid";
-import HomeSolid from "../../icons/HomeSolid/HomeSolid";
-import SpadeSolid from "../../icons/SpadeSolid/SpadeSolid";
+import Button from "../../components/Button/Button";
 import "./ResultsPage.scss";
 
 const ResultsPage: React.FC = () => {
@@ -80,23 +76,18 @@ const ResultsPage: React.FC = () => {
       <div className="results" style={{ fontSize: "24px", display: "flex", flexDirection: "column", width: "100%" }}>
         {pointsRow}
       </div>
-      <div></div>
-      <BottomNav>
-        <CaretLeftSolid
-          height="24px"
-          color="pink"
-          disabled={idx === "0"}
-          handleClick={() => history.push(`/results/${+idx - 1}`)}
-        />
-        <HomeSolid height="24px" color="pink" handleClick={() => history.push("/")} />
-        <SpadeSolid height="24px" color="pink" handleClick={() => history.push("/poker/" + idx)} />
-        <CaretRightSolid
-          height="24px"
+      <div className="buttons">
+        <Button
+          type="contained"
+          label="NEXT"
           color="pink"
           disabled={+idx >= stories.length - 1}
-          handleClick={() => history.push(`/results/${+idx + 1}`)}
+          handleClick={() => +idx < stories.length - 1 && history.push(`/poker/${+idx + 1}`)}
         />
-      </BottomNav>
+        <Link to={`/poker/${idx}`}>
+          <Button type="text" label="REDO" color="pink" />
+        </Link>
+      </div>
     </Page>
   );
 };
