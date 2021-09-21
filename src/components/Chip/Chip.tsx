@@ -13,7 +13,7 @@ const Chip: React.FC<ChipProps> = ({ className, user }) => {
   return (
     <div className={chipClassNames}>
       <img
-        src={`https://picsum.photos/seed/${Math.round(Math.random() * 1000)}/60`}
+        src={`https://picsum.photos/seed/${user.name}${new Date().getHours()}/60`}
         alt="random pic"
         height="60"
         width="60"
