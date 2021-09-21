@@ -22,6 +22,11 @@ const ResultsPage: React.FC = () => {
 
   const history = useHistory();
 
+  if (!currentStory) {
+    history.push("/");
+    return <div></div>;
+  }
+
   const { addPoints, onAddPoints } = useContext(PokerContext);
 
   const pointsRow = userState.map((curr: User, idx: number) => {
@@ -70,7 +75,7 @@ const ResultsPage: React.FC = () => {
   return (
     <Page className="ResultsPage" color="veryDarkBlue">
       <header>
-        <h1>Results</h1>
+        <h1>{currentStory.title}</h1>
       </header>
       <div className="results" style={{ fontSize: "24px", display: "flex", flexDirection: "column", width: "100%" }}>
         {pointsRow}
