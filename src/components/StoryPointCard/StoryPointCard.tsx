@@ -12,7 +12,7 @@ const StoryPointCard: React.FC<StoryPointCardProps> = ({ value, selected, handle
     <div
       className="background-image"
       style={{
-        backgroundImage: `url(https://picsum.photos/seed/${value !== "?" ? value : "34"}${new Date().getDay()}/200)`,
+        backgroundImage: `url(https://picsum.photos/seed/${value !== "?" ? value : "34"}${new Date().getHours()}/200)`,
       }}
     >
       <div className={`points-container ${selected ? "selected" : ""}`}>
