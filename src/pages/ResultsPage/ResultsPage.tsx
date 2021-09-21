@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import StoryContext from "../../contexts/StoryContext";
 import { getPoints } from "../../services/apiService";
 import PokerContext from "../../contexts/PokerContext";
 import UserContext, { User, UserValue } from "../../contexts/UserContext";
 import Page from "../../components/Page/Page";
-import Button from "../../components/Button/Button";
 import Result from "../../components/Result/Result";
+import BottomNav from "../../components/BottomNav/BottomNav";
+import CaretLeftSolid from "../../icons/CaretLeftSolid/CaretLeftSolid";
+import CaretRightSolid from "../../icons/CaretRightSolid/CaretRightSolid";
+import HomeSolid from "../../icons/HomeSolid/HomeSolid";
+import RedoSolid from "../../icons/RedoSolid/RedoSolid";
 import "./ResultsPage.scss";
 
 const ResultsPage: React.FC = () => {
@@ -15,6 +19,8 @@ const ResultsPage: React.FC = () => {
   const { userState } = useContext(UserContext) as UserValue;
   const { idx } = useParams<{ idx: string }>();
   const currentStory = stories[+idx];
+
+  const history = useHistory();
 
   const { addPoints, onAddPoints } = useContext(PokerContext);
 
@@ -59,7 +65,7 @@ const ResultsPage: React.FC = () => {
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [idx]);
 
   return (
     <Page className="ResultsPage" color="veryDarkBlue">
@@ -69,10 +75,23 @@ const ResultsPage: React.FC = () => {
       <div className="results" style={{ fontSize: "24px", display: "flex", flexDirection: "column", width: "100%" }}>
         {pointsRow}
       </div>
-      <div>
-        <Button type="contained" label="AGAIN" color="pink" />
-        <Button type="text" label="HOME" color="pink" />
-      </div>
+      <div></div>
+      <BottomNav>
+        <CaretLeftSolid
+          height="24px"
+          color="pink"
+          disabled={idx === "0"}
+          handleClick={() => history.push(`/results/${+idx - 1}`)}
+        />
+        <HomeSolid height="24px" color="pink" handleClick={() => history.push("/")} />
+        <RedoSolid height="24px" color="pink" handleClick={() => history.push("/poker/" + idx)} />
+        <CaretRightSolid
+          height="24px"
+          color="pink"
+          disabled={+idx >= stories.length - 1}
+          handleClick={() => history.push(`/results/${+idx + 1}`)}
+        />
+      </BottomNav>
     </Page>
   );
 };

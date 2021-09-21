@@ -22,7 +22,7 @@ const Result: React.FC<ResultProps> = ({ isAllIn, user, points }) => {
   }
 
   return (
-    <div className="Result">
+    <div className={`Result${points ? " color" : ""}`}>
       <div className="user">{user.name}</div>
       <div className="points">{pointsOrIcon}</div>
     </div>

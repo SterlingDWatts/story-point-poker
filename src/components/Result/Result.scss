@@ -1,5 +1,11 @@
+@import "../../App.scss";
+
 .Result {
   display: flex;
+
+  &.color {
+    color: $main-pink;
+  }
 
   .user {
     height: 54px;
