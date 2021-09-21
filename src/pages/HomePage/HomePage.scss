@@ -1,0 +1,17 @@
+.HomePage {
+  justify-content: space-between;
+
+  .user-chips {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    gap: 16px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

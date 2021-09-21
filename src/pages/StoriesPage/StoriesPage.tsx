@@ -9,7 +9,7 @@ import Button from "../../components/Button/Button";
 import { postStories, getStories, deleteStory as deleteStoryAPI } from "../../services/apiService";
 import LoginContext, { LoginValue } from "../../contexts/LoginContext";
 import PokerContext from "../../contexts/PokerContext";
-import "./StoriesPage.css";
+import "./StoriesPage.scss";
 
 export interface Story {
   title: string;

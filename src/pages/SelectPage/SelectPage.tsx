@@ -6,7 +6,7 @@ import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
 import StoryContext from "../../contexts/StoryContext";
 import LoginContext from "../../contexts/LoginContext";
 import { postPoints } from "../../services/apiService";
-import "./SelectPage.css";
+import "./SelectPage.scss";
 
 const SelectPage: React.FC = () => {
   const [storyPoints, setStoryPoints] = useState([

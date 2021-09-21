@@ -1,11 +1,8 @@
-.ResultsPage.Page h1 {
-  font-size: 30px;
-  min-height: initial;
-}
-
-.ResultsPage .buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+.ResultsPage {
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
 }

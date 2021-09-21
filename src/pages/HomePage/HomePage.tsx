@@ -7,7 +7,7 @@ import LoginContext from "../../contexts/LoginContext";
 import UserContext, { UserValue } from "../../contexts/UserContext";
 import StoryContext from "../../contexts/StoryContext";
 import { getUsers, getStories } from "../../services/apiService";
-import "./HomePage.css";
+import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
   const { loginState } = useContext(LoginContext);
@@ -58,7 +58,7 @@ const HomePage: React.FC = () => {
   return (
     <Page className="HomePage" color="blue">
       <header>
-        <h1>MINDERA POKER</h1>
+        <h1>STORY POINT POKER</h1>
       </header>
       <div className="user-chips">{users}</div>
       <div className="buttons">

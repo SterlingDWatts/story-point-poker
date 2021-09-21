@@ -1,0 +1,17 @@
+.StoriesPage {
+  header {
+    color: #0047cb;
+    width: 100%;
+  }
+
+  .Fab {
+    position: relative;
+    top: -19px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
