@@ -10,7 +10,7 @@ import BottomNav from "../../components/BottomNav/BottomNav";
 import CaretLeftSolid from "../../icons/CaretLeftSolid/CaretLeftSolid";
 import CaretRightSolid from "../../icons/CaretRightSolid/CaretRightSolid";
 import HomeSolid from "../../icons/HomeSolid/HomeSolid";
-import RedoSolid from "../../icons/RedoSolid/RedoSolid";
+import SpadeSolid from "../../icons/SpadeSolid/SpadeSolid";
 import "./ResultsPage.scss";
 
 const ResultsPage: React.FC = () => {
@@ -89,7 +89,7 @@ const ResultsPage: React.FC = () => {
           handleClick={() => history.push(`/results/${+idx - 1}`)}
         />
         <HomeSolid height="24px" color="pink" handleClick={() => history.push("/")} />
-        <RedoSolid height="24px" color="pink" handleClick={() => history.push("/poker/" + idx)} />
+        <SpadeSolid height="24px" color="pink" handleClick={() => history.push("/poker/" + idx)} />
         <CaretRightSolid
           height="24px"
           color="pink"
