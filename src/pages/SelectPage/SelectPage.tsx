@@ -59,7 +59,7 @@ const SelectPage: React.FC = () => {
   return (
     <Page className="SelectPage" color="yellow">
       <header>
-        <h1>{currentStory.title}</h1>
+        <h1>{currentStory.title.toUpperCase()}</h1>
       </header>
       <div className="cards">{cards}</div>
       <div className="buttons">

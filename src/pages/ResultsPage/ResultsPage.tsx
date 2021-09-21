@@ -71,7 +71,7 @@ const ResultsPage: React.FC = () => {
   return (
     <Page className="ResultsPage" color="veryDarkBlue">
       <header>
-        <h1>{currentStory.title}</h1>
+        <h1>{currentStory.title.toUpperCase()}</h1>
       </header>
       <div className="results" style={{ fontSize: "24px", display: "flex", flexDirection: "column", width: "100%" }}>
         {pointsRow}
