@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import TextInput, { TextInputProps } from "../TextInput";
 import Required from "../Required";
-import "./style.css";
+import "./style.scss";
 
 interface TextInputGroupProps extends TextInputProps {
   label: string;
