@@ -1,5 +1,5 @@
 import React from "react";
-import "./BottomNav.scss";
+import "./style.scss";
 
 interface BottomNavProps {
   children: unknown;

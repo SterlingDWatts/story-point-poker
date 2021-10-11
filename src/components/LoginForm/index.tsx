@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import TextInputGroup from "../TextInputGroup/TextInputGroup";
-import SelectGroup from "../SelectGroup/SelectGroup";
-import Button from "../Button/Button";
+import TextInputGroup from "../TextInputGroup";
+import SelectGroup from "../SelectGroup";
+import Button from "../Button";
 import LoginContext from "../../contexts/LoginContext";
 import PokerContext, { PokerUser } from "../../contexts/PokerContext";
 import { LoginValue } from "../../models/loginContext";

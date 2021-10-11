@@ -1,12 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Page from "../../components/Page/Page";
-import Button from "../../components/Button/Button";
-import Chip from "../../components/Chip/Chip";
+import Page from "../../components/Page";
+import Button from "../../components/Button";
+import Chip from "../../components/Chip";
 import LoginContext from "../../contexts/LoginContext";
-import UserContext, { UserValue } from "../../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import StoryContext from "../../contexts/StoryContext";
 import { getUsers, getStories } from "../../services/apiService";
+import { UserValue } from "../../models/userContext";
 import "./style.scss";
 
 const HomePage: React.FC = () => {

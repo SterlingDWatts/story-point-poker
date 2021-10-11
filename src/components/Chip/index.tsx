@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
-import { User } from "../../contexts/UserContext";
-import "./Chip.scss";
+import { User } from "../../models/userContext";
+import "./style.scss";
 
 interface ChipProps {
   className?: string;

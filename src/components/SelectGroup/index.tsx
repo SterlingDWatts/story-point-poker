@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import Select, { SelectProps } from "../Select/Select";
+import Select, { SelectProps } from "../Select";
 import Option, { OptionProps } from "../Option/Option";
-import "./SelectGroup.css";
+import "./style.scss";
 
 interface SelectGroupProps extends Partial<SelectProps>, Partial<OptionProps> {
   className?: string;

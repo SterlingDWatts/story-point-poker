@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import "./Page.scss";
+import "./style.scss";
 
 interface PageProps {
   children?: JSX.Element[];

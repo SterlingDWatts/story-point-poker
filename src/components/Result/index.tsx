@@ -1,8 +1,8 @@
 import React from "react";
 import CheckRegular from "../../icons/CheckRegular";
 import LoadingEllipsis from "../LoadingEllipsis";
-import { User } from "../../contexts/UserContext";
-import "./Result.scss";
+import { User } from "../../models/userContext";
+import "./style.scss";
 
 interface ResultProps {
   isAllIn: boolean;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Required.css";
+import "./style.scss";
 
 const Required: React.FC = () => <span className="Required"> *</span>;
 

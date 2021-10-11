@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import config from "../config";
-import { User } from "../contexts/UserContext";
+import { User } from "../models/userContext";
 import { Story } from "../models/story";
 
 type GetUsers = () => Promise<AxiosResponse<{ users: User[] }>>;

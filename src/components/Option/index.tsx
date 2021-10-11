@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import "./Option.css";
+import "./style.scss";
 
 export interface OptionProps {
   value: string;

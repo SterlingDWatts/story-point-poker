@@ -1,30 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useReducer } from "react";
+import { UserValue, UserReducer, User, UserState } from "../models/userContext";
 
-export interface User {
-  _id: string;
-  name: string;
-  role: string;
-  isLoggedIn: boolean;
-}
+const defaultUserValue: UserValue = {
+  userState: [],
+  addUser: (_: User[]) => {
+    // do nothing
+  },
+  clearUsers: () => {
+    // do nothing
+  },
+  removeUser: (_id: string) => {
+    // do nothing
+  },
+  editUser: (_user: User) => {
+    // do nothing
+  },
+};
 
-type UserState = User[];
-
-interface UserAction {
-  type: "add-user" | "clear-users" | "remove-user" | "edit-user";
-  payload: User[];
-}
-
-export interface UserValue {
-  userState: UserState;
-  addUser: (users: User[]) => void;
-  clearUsers: () => void;
-  removeUser: (_id: string) => void;
-  editUser: (user: User) => void;
-}
-
-type UserReducer = (state: UserState, action: UserAction) => UserState;
-
-const UserContext = createContext<UserValue | null>(null);
+const UserContext = createContext<UserValue>(defaultUserValue);
 
 const userStateReducer: UserReducer = (state, action) => {
   switch (action.type) {

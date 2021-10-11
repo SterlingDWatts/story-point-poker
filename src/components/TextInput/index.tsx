@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import "./TextInput.scss";
+import "./style.scss";
 
 export interface TextInputProps {
   name?: string;

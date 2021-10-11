@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import jwtDecode from "jwt-decode";
-import { User } from "../contexts/UserContext";
+import { User } from "../models/userContext";
 import config from "../config";
 
 const tokenService = {

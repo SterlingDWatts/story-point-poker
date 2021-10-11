@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router";
 import PokerContext, { PokerUser } from "./contexts/PokerContext";
-import UserContext, { UserValue } from "./contexts/UserContext";
+import UserContext from "./contexts/UserContext";
 import LoginContext from "./contexts/LoginContext";
 import StoryContext from "./contexts/StoryContext";
 import { getUsers, getStories, postUser } from "./services/apiService";
-import { LoginValue } from "./models/loginContext";
 import tokenService from "./services/tokenService";
+import { UserValue } from "./models/userContext";
+import { LoginValue } from "./models/loginContext";
 import HomePage from "./pages/HomePage";
 import JoinPage from "./pages/LoginPage";
 import SelectPage from "./pages/SelectPage";

@@ -3,10 +3,11 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import StoryContext from "../../contexts/StoryContext";
 import { getPoints } from "../../services/apiService";
 import PokerContext from "../../contexts/PokerContext";
-import UserContext, { User, UserValue } from "../../contexts/UserContext";
-import Page from "../../components/Page/Page";
-import Result from "../../components/Result/Result";
-import Button from "../../components/Button/Button";
+import UserContext from "../../contexts/UserContext";
+import { UserValue, User } from "../../models/userContext";
+import Page from "../../components/Page";
+import Result from "../../components/Result";
+import Button from "../../components/Button";
 import "./style.scss";
 
 const ResultsPage: React.FC = () => {

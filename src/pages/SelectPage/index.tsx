@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
-import Page from "../../components/Page/Page";
-import Button from "../../components/Button/Button";
-import StoryPointCard from "../../components/StoryPointCard/StoryPointCard";
+import Page from "../../components/Page";
+import Button from "../../components/Button";
+import StoryPointCard from "../../components/StoryPointCard";
 import StoryContext from "../../contexts/StoryContext";
 import LoginContext from "../../contexts/LoginContext";
 import { postPoints } from "../../services/apiService";

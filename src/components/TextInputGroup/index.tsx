@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import TextInput, { TextInputProps } from "../TextInput/TextInput";
-import Required from "../Required/Required";
-import "./TextInputGroup.css";
+import TextInput, { TextInputProps } from "../TextInput";
+import Required from "../Required";
+import "./style.css";
 
 interface TextInputGroupProps extends TextInputProps {
   label: string;

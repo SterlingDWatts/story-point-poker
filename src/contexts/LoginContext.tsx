@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { User } from "../contexts/UserContext";
+import { User } from "../models/userContext";
 import { LoginState, LoginValue, LoginReducer } from "../models/loginContext";
 import tokenService from "../services/tokenService";
 
