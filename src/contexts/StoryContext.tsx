@@ -1,14 +1,15 @@
 import React, { createContext, useState } from "react";
-import { Story } from "../pages/StoriesPage/StoriesPage";
+import { Story } from "../models/story";
 
 const StoryContext = createContext({
   stories: [] as Story[],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   addStories: (_: Story[]) => {
-    console.log(_);
+    // do nothing
   },
 });
 
-export const StoryProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+export const StoryProvider: React.FC = ({ children }) => {
   const [stories, setStories] = useState<Story[]>([]);
 
   const addStories = (stories: Story[]) => {

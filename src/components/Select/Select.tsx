@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import CaretUpSolid from "../../icons/CaretUpSolid/CaretUpSolid";
+import CaretUpSolid from "../../icons/CaretUpSolid";
 import Required from "../Required/Required";
 import "./Select.css";
 

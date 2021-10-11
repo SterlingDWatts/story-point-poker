@@ -1,6 +1,6 @@
 import React from "react";
-import CheckRegular from "../../icons/CheckRegular/CheckRegular";
-import LoadingEllipsis from "../../components/LoadingEllipsis/LoadingEllipsis";
+import CheckRegular from "../../icons/CheckRegular";
+import LoadingEllipsis from "../LoadingEllipsis";
 import { User } from "../../contexts/UserContext";
 import "./Result.scss";
 

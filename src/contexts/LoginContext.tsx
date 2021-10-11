@@ -1,36 +1,20 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createContext, useReducer } from "react";
 import { User } from "../contexts/UserContext";
+import { LoginState, LoginValue, LoginReducer } from "../models/loginContext";
 import tokenService from "../services/tokenService";
 
-interface State {
-  isLoggedIn: boolean;
-  token: User | null | undefined;
-}
-
-interface Action {
-  type: "get-token" | "set-token" | "logout";
-  payload?: string | undefined;
-}
-
-export interface LoginValue {
-  loginState: State;
-  getToken: () => void;
-  setToken: (token: string) => void;
-  logout: () => void;
-}
-
-type LoginReducer = (state: State, action: Action) => State;
-
-const LoginContext = createContext<LoginValue>({
+const defaultContext: LoginValue = {
   loginState: { isLoggedIn: false, token: null },
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  getToken: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setToken: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  logout: () => {},
-});
+  getToken: () => {
+    // do nothing
+  },
+  setToken: () => {
+    // do nothing
+  },
+  logout: () => {
+    // do nothing
+  },
+};
 
 const LoginStateReducer: LoginReducer = (state, action) => {
   let token: User | null | undefined;
@@ -53,8 +37,10 @@ const LoginStateReducer: LoginReducer = (state, action) => {
   }
 };
 
-export const LoginProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const [loginState, dispatch] = useReducer(LoginStateReducer, { isLoggedIn: false, token: null } as State);
+const LoginContext = createContext<LoginValue>(defaultContext);
+
+export const LoginProvider: React.FC = ({ children }) => {
+  const [loginState, dispatch] = useReducer(LoginStateReducer, { isLoggedIn: false, token: null } as LoginState);
 
   const getToken = () => {
     dispatch({ type: "get-token" });
